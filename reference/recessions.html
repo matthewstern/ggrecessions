@@ -40,9 +40,10 @@
 
 
 <meta property="og:title" content="Recessions — recessions" />
-<meta property="og:description" content="The recessions table is published by NBER. The fetch_recessions
-function downloads the current table from NBER and formats it for use by
-other functions in this package." />
+<meta property="og:description" content="The fetch_recessions() function downloads the current recessions table
+from the NBER website and formats it for use by other functions in this
+package. The recessions table is the function's output, stored within
+the package for easy access." />
 
 
 
@@ -111,9 +112,10 @@ other functions in this package." />
     </div>
 
     <div class="ref-description">
-    <p>The <code>recessions</code> table is published by NBER. The <code>fetch_recessions</code>
-function downloads the current table from NBER and formats it for use by
-other functions in this package.</p>
+    <p>The <code>fetch_recessions()</code> function downloads the current recessions table
+from the NBER website and formats it for use by other functions in this
+package. The <code>recessions</code> table is the function's output, stored within
+the package for easy access.</p>
     </div>
 
     <pre class="usage"><span class='va'>recessions</span>
@@ -138,12 +140,12 @@ package development team.</p></td>
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A data frame with the following variables:</p><ul>
-<li><p><code>start_char, end_char</code>: Easily readable labels for the beginning
-and end of the recession.</p></li>
+<li><p><code>start_char, end_char</code>: Easily readable labels for the beginning and
+end of the recession.</p></li>
 <li><p><code>start_date, end_date</code>: Recession Dates
 expressed in R datetime format, using the first day of the specified month.</p></li>
-<li><p><code>ongoing</code>: Logical. Whether or not the recession is ongoing as of
-the latest available NBER data.</p></li>
+<li><p><code>ongoing</code>: Logical. Whether or not the recession is ongoing as
+of the latest available NBER data.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
@@ -177,7 +179,7 @@ the latest available NBER data.</p></li>
 
       <footer>
       <div class="copyright">
-  <p>Developed by First Last.</p>
+  <p>Developed by Matthew Stern.</p>
 </div>
 
 <div class="pkgdown">
