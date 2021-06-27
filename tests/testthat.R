@@ -1,9 +1,7 @@
-# this file was created and populated by usethis::create_tidy_package. I don't
-# know how to use it yet, but I had to comment out the test_check() line for
-# devtools::check() to pass.
+# The existence of this file forces devtools::check() to run all the tests in
+# the "tests/testthat/" directory.
 
 library(testthat)
 library(ggrecessions)
 
-
-#test_check("ggrecessions")
+test_check("ggrecessions")

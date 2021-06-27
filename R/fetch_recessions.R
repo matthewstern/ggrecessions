@@ -1,28 +1,29 @@
 #' Recessions
 #'
-#' The \code{recessions} table is published by NBER. The \code{fetch_recessions}
-#' function downloads the current table from NBER and formats it for use by
-#' other functions in this package.
+#' The \code{fetch_recessions()} function downloads the current recessions table
+#' from the NBER website and formats it for use by other functions in this
+#' package. The \code{recessions} table is the function's output, stored within
+#' the package for easy access.
 #'
 #' @format A data frame with the following variables: \itemize{ \item
-#'  \code{start_char, end_char}: Easily readable labels for the beginning
-#'  and end of the recession. \item \code{start_date, end_date}: Recession Dates
-#'  expressed in R datetime format, using the first day of the specified month.
-#'  \item \code{ongoing}: Logical. Whether or not the recession is ongoing as of
-#'  the latest available NBER data. }
+#'   \code{start_char, end_char}: Easily readable labels for the beginning and
+#'   end of the recession. \item \code{start_date, end_date}: Recession Dates
+#'   expressed in R datetime format, using the first day of the specified month.
+#'   \item \code{ongoing}: Logical. Whether or not the recession is ongoing as
+#'   of the latest available NBER data. }
 #'
 #' @source \url{https://www.nber.org/data/cycles/cycle dates pasted.csv}
 #'
 #'
 "recessions"
 
-#'Fetch current recessions
+#' Fetch current recession table
 #'
 #' @describeIn recessions Function for fetching recessions from NBER website
 #'
 #' @param url Char, the web location of the NBER machine-readable CSV file. The
-#'  default, \code{NULL}, uses the most recently identified URL known to the
-#'  package development team.
+#'   default, \code{NULL}, uses the most recently identified URL known to the
+#'   package development team.
 #' @param quietly Logical, suppresses messages.
 #'
 #' @examples
