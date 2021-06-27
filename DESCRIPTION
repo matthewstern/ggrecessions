@@ -1,13 +1,13 @@
 Package: ggrecessions
-Title: What the Package Does (One Line, Title Case)
+Title: Add recession or other background data to ggplots
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person("Matthew", "Stern",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "matthewstern@pm.me",
+           comment = c(ORCID = "0000-0001-9119-2121"))
+Description: This function extends ggplot2 to allow for easy placement of 
+  recessions (or other background time period data) on plots in R.
 License: MIT + file LICENSE
 Imports:
     dplyr,
