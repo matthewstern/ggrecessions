@@ -11,6 +11,7 @@ Description: This function extends ggplot2 to allow for easy placement of
 License: MIT + file LICENSE
 Imports:
     dplyr,
+    lubridate,
     utils
 Suggests: 
     covr,

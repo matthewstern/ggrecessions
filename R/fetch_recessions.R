@@ -7,7 +7,7 @@
 #'
 #' @format A data frame with the following variables: \itemize{ \item
 #'   \code{start_char, end_char}: Easily readable labels for the beginning and
-#'   end of the recession. \item \code{start_date, end_date}: Recession Dates
+#'   end of the recession. \item \code{start, end}: Recession Dates
 #'   expressed in R datetime format, using the first day of the specified month.
 #'   \item \code{ongoing}: Logical. Whether or not the recession is ongoing as
 #'   of the latest available NBER data. }
@@ -47,7 +47,7 @@ fetch_recessions <- function(url = NULL, quietly = FALSE){
   }
 
   # locally bind variable names
-  start_char <- end_char <- start_date <- end_date <- ongoing <- index <- peak <- trough <- NULL
+  start_char <- end_char <- start <- end <- ongoing <- index <- peak <- trough <- NULL
 
     # attempt to download and format recessions table
     tryCatch({
@@ -59,30 +59,30 @@ fetch_recessions <- function(url = NULL, quietly = FALSE){
         # convert peaks and troughs...
         mutate(
           # ...to R dates
-          start_date = as.Date(peak),
-          end_date = as.Date(trough),
+          start = as.Date(peak),
+          end = as.Date(trough),
           # ... and clean char strings
-          start_char = format(start_date, "%b %Y"),
-          end_char = format(end_date, "%b %Y")) %>%
+          start_char = format(start, "%b %Y"),
+          end_char = format(end, "%b %Y")) %>%
         # confirm ascending and create row number
-        arrange(start_date) %>%
+        arrange(start) %>%
         mutate(index = row_number()) %>%
         mutate(
           # Flag unfinished recessions
           ongoing = case_when(
-            is.na(end_date) & index == max(.$index) ~ T,
+            is.na(end) & index == max(.$index) ~ T,
             TRUE ~ F),
           # set ongoing recession to arbitrary future date
-          end_date = case_when(
+          end = case_when(
             ongoing ~ as.Date("2200-01-01"),
-            TRUE ~ end_date),
+            TRUE ~ end),
           # mark ongoing recession in char field
           end_char = case_when(
             ongoing ~ "Ongoing",
             TRUE ~ end_char)
         ) %>%
         # clean up
-        select(start_char, end_char, start_date, end_date, ongoing)
+        select(start_char, end_char, start, end, ongoing)
 
       if (!quietly) {message("Successfully fetched from NBER")}
 
