@@ -8,7 +8,7 @@
 \format{
 A data frame with the following variables: \itemize{ \item
 \code{start_char, end_char}: Easily readable labels for the beginning and
-end of the recession. \item \code{start_date, end_date}: Recession Dates
+end of the recession. \item \code{start, end}: Recession Dates
 expressed in R datetime format, using the first day of the specified month.
 \item \code{ongoing}: Logical. Whether or not the recession is ongoing as
 of the latest available NBER data. }
