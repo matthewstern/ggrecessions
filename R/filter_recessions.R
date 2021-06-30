@@ -7,16 +7,16 @@
 #' @param rtable the (recessions) table to clip. Must have, at a minimum,
 #'   columns named `start` and `end`.
 #'
-#' @return data.frame with two columns, start and end. These columns are
-#'   numeric, and contain either decimal dates or the numeric equivalent of an R
-#'   date depending on the value of \code{date_scale}
+#' @return data.frame with two columns, start and end. Column formats are
+#'   determined by \code{date_scale}.
 #'
 #' @importFrom lubridate decimal_date
+#' @importFrom lubridate as_date
 #' @import dplyr
 #'
 #' @noRd
 #'
-filter_recessions <- function(min, max, date_scale, show_ongoing, rtable){
+filter_recessions <- function(min, max, date_scale = FALSE, show_ongoing = FALSE, rtable = get("recessions")){
 
   # Bind local variables to function
   end <- start <- ongoing <- NULL
@@ -30,8 +30,8 @@ filter_recessions <- function(min, max, date_scale, show_ongoing, rtable){
   if (!date_scale & class(rtable$start) == "Date") {
     rtable <- mutate(
       rtable,
-      start = lubridate::decimal_date(start),
-      end = lubridate::decimal_date(end)
+      start = decimal_date(start),
+      end = decimal_date(end)
     )
   }
 
@@ -41,8 +41,15 @@ filter_recessions <- function(min, max, date_scale, show_ongoing, rtable){
   # If `min` or `max` fall in  middle of a recession, modify recession to end at specified term.
   rtable <- transmute(
     rtable,
-    start = as.numeric(if_else(start < min, min, start)),
-    end = as.numeric(if_else(end > max, max, end))
+    start = ifelse(start < min, min, start),
+    end = ifelse(end > max, max, end)
+  )
+
+  # coerce `start` and `date` into preferred format
+  rtable <- mutate(
+    rtable,
+    start = do.call(ifelse(date_scale, "as_date", "as.numeric"), list(start)),
+    end = do.call(ifelse(date_scale, "as_date", "as.numeric"), list(end))
   )
 
   return(rtable)
